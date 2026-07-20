@@ -1,5 +1,8 @@
 # PixelPaws Project Tracker
 
+Formal, ID-mapped requirements now live in [`REQUIREMENTS.md`](REQUIREMENTS.md) — each `REQ-XXX-NNN` is
+traced to a planned BDD feature/scenario there. This tracker remains the day-to-day TODO/progress log.
+
 ## Project Setup
 - [x] Initialise project with uv (`pyproject.toml`)
 - [x] Add dependencies (pillow, pygame, taskipy)
@@ -27,6 +30,13 @@
 - [ ] Decide what `Whisker-stretch.gif` is for (idle variation? waking-up step? something else?)
 
 ## BDD Tests
+- [x] All planned `.feature` files scaffolded in `tests/features/` (`onboarding`, `stats`, `feeding`, `playing`,
+  `sleeping`, `state_machine`, `ui`), each scenario tagged with its `REQ-XXX-NNN` ID — see
+  [`REQUIREMENTS.md`](REQUIREMENTS.md) §3 for the full traceability matrix. Applied the earlier feedback on the
+  `Feeding` draft throughout: deterministic time control (e.g. "When 30 minutes pass") instead of "enough time
+  has passed", concrete `Given` values (e.g. "the Tummy stat is 2") instead of "the cat is hungry".
+- [ ] Step definitions (`tests/step_defs/`) — not started; feature files are currently inert (0 items collected)
+  until steps exist, by design (BDD-first: scenarios before implementation)
 - [ ] Feed action restores Tummy stat to full
 - [ ] Play action restores Happy stat and depletes Energy
 - [ ] Sleep action restores Energy stat over time
@@ -37,7 +47,6 @@
 - [ ] Sleep pressed triggers Falling Asleep → Sleeping transition
 - [ ] Energy restored during Sleeping triggers Waking Up → Idle transition
 - [ ] Onboarding: selecting variant + naming the cat + pressing Start begins the game
-- [x] First draft written: `Feeding` feature (3 scenarios) — reviewed, revisions pending (deterministic time control instead of "enough time has passed"; concrete Given values instead of "the cat is hungry")
 
 ## Game Implementation — Phase 1 (MVP)
 ## CI

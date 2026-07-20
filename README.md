@@ -56,6 +56,7 @@ _TBD — coming once Phase 1 (MVP) is implemented._
 pixelpaws/
 ├── pyproject.toml
 ├── project.md                # Living progress/TODO tracker
+├── REQUIREMENTS.md           # Numbered requirements (REQ-XXX-NNN), mapped to BDD scenarios
 ├── virtual_pet_spec.docx     # Original game spec
 ├── .github/
 │   └── workflows/

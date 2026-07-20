@@ -26,6 +26,11 @@ target-version = ["py312"]
 [tool.pytest.ini_options]
 pythonpath = ["."]
 bdd_features_base_dir = "tests/features/"
+# REQ-XXX-NNN Gherkin tags (see REQUIREMENTS.md) become pytest marks for BDD traceability.
+# Not registered individually below — with ~40 of them, that's a second list to keep in sync.
+filterwarnings = [
+    "ignore::pytest.PytestUnknownMarkWarning",
+]
 
 [tool.taskipy.tasks]
 test = "pytest --cov=src --cov-report=term-missing"
