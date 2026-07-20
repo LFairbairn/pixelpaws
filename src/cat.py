@@ -2,9 +2,11 @@ from src.animations import ANIMATIONS, Animation
 from src.cat_state import TRANSITIONS, CatEvent, CatState
 from src.stats import Stat
 
-# Placeholder balance value: 1 Energy point restored per 5 minutes asleep.
-# Not yet specified by the product owner — tune once playtested.
-SLEEP_ENERGY_RESTORE_PER_SECOND = 1.0 / 300.0
+# Placeholder balance value, deliberately fast for now: 1 Energy point
+# restored per 2 seconds asleep, so a full sleep cycle is watchable in one
+# sitting during playtesting. Not a final balance decision — real pacing
+# still TBD with the product owner.
+SLEEP_ENERGY_RESTORE_PER_SECOND = 0.5
 
 
 class Cat:
@@ -32,8 +34,13 @@ class Cat:
         self._handle(CatEvent.ANIMATION_COMPLETE)
 
     def restore_energy(self, amount: float) -> None:
+        # Edge-triggered: only fires on the tick where Energy actually
+        # crosses into "full", not merely "happens to already be full"
+        # (e.g. Sleep pressed when Energy is already 10 shouldn't instantly
+        # wake the cat back up — nothing was restored).
+        was_full = self.energy.is_full
         self.energy.restore(amount)
-        if self.energy.is_full:
+        if not was_full and self.energy.is_full:
             self._handle(CatEvent.ENERGY_RESTORED)
 
     def tick(self, seconds: float) -> None:
