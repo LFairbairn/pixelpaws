@@ -232,6 +232,15 @@ Priority: Should · Verification: Test
 The system shall play `sleepy_idle.gif` as an idle variation when the Energy stat is low (see REQ-STAT-008).
 *Feature:* `sleeping.feature` → *Scenario:* "Energy low plays sleepy idle variation"
 
+**REQ-ANIM-011** — Idle wandering
+Priority: Should · Verification: Demonstration
+While the cat is in the Idle state, the system shall occasionally play a walking animation (`walking_left.gif`
+or `walking_right.gif`) moving the cat a short distance, pause on `stand_idle.gif`, then walk back and resume
+the normal idle animation. Purely cosmetic — has no effect on stats or game state, so it isn't modelled as a
+`CatState`/BDD-testable transition; verified by running the app.
+Source: Backlog — new assets added 2026-07-20, not in original spec.
+*Feature:* — (demonstration only)
+
 **REQ-ANIM-010** — Zoomies animation
 Priority: Could · Verification: Test
 The system shall play `zoomies.gif` on loop while the cat is in the Zoomies state.
@@ -384,6 +393,7 @@ children.
 | REQ-ANIM-008 | Sad animation | Should | playing.feature | Not Started |
 | REQ-ANIM-009 | Sleepy idle animation | Should | sleeping.feature | Not Started |
 | REQ-ANIM-010 | Zoomies animation | Could | playing.feature | Not Started |
+| REQ-ANIM-011 | Idle wandering | Should | — (demonstration) | Not Started |
 | REQ-AUD-001 | Meow sound | Should | feeding.feature | Not Started |
 | REQ-AUD-002 | Happy sound | Should | playing.feature | Not Started |
 | REQ-AUD-003 | Eating sound | Should | feeding.feature | Not Started |
@@ -434,3 +444,4 @@ testable requirements:
 |---|---|
 | 2026-07-13 | v1.0 — initial requirements set drafted from `virtual_pet_spec.docx` §3–§9 |
 | 2026-07-20 | Added REQ-SM-007, REQ-ANIM-010, REQ-STAT-009 (Zoomies) — Chief Product Owner idea, not in original spec. Trigger-window duration and exit condition flagged as open questions (§4). |
+| 2026-07-20 | Added REQ-ANIM-011 (idle wandering) — new `stand_idle`/`walking_left`/`walking_right` assets, not in original spec. Purely cosmetic, not modelled as a `CatState`. |

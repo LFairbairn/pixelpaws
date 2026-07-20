@@ -19,7 +19,8 @@ traced to a planned BDD feature/scenario there. This tracker remains the day-to-
 - [x] Add `Whisker-stretch.gif` (+x10) — new animation, trigger/state not yet decided
 - [ ] Add eating.gif animation (Phase 2 item from spec, ties to kitchen background)
 - [ ] Add playing.gif animation (Phase 2 item from spec, ties to garden background)
-- [ ] Add walking.gif animation (new idea, not in original spec — purpose/trigger TBD)
+- [x] Add `walking_left.gif`/`walking_right.gif`/`stand_idle.gif` (+x10) — purpose decided: occasional
+  idle wandering (REQ-ANIM-011), implemented in `src/ui.py`
 - [x] Add `assets/backgrounds/bedroom.png` — synced to Sleep state (product owner's idea: backgrounds match cat behaviour)
 - [ ] Add kitchen background — for Feed/eating
 - [ ] Add garden background — for Play
