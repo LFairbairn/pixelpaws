@@ -56,7 +56,16 @@ traced to a planned BDD feature/scenario there. This tracker remains the day-to-
 - [ ] Fill in How to Run (once `src/main.py` exists)
 - [ ] Add screenshots
 
-## Future Ideas
+## Backlog
+Raw ideas — captured as soon as they come up, not yet scoped or committed to a phase. No format
+required beyond "who suggested it and what it is"; refine later. Once an idea has enough shape to be
+testable, promote it into [`REQUIREMENTS.md`](REQUIREMENTS.md) as a numbered `REQ-XXX-NNN` and delete it
+from here.
+
 - Feed action could ignore presses when Tummy is already at/near full (not a strict cooldown timer, just a threshold check) — prevents spamming the eating sound/animation. Came up while drafting the Feeding BDD scenarios; not critical, revisit if it matters once Feed is implemented.
+
 ## Phase 2 — Polish
 ## Phase 3 — Extras
+- [ ] Zoomies state (REQ-SM-007, REQ-ANIM-010, REQ-STAT-009) — triggered by rapid Play presses while
+  Energy is high. Chief Product Owner idea, 2026-07-20. Trigger-window duration and exit condition are
+  open questions — see `REQUIREMENTS.md` §4. Needs a `zoomies.gif` asset before it can be implemented.

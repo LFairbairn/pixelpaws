@@ -40,3 +40,12 @@ Feature: Playing
     Given the Happy stat is 5
     When the player presses the Play button
     Then the "happy" sound effect plays
+
+  @REQ-SM-007 @REQ-ANIM-010 @REQ-STAT-009
+  Scenario: Cat gets zoomies from too much play
+    Given the Energy stat is 8
+    And the Play button has been pressed 3 times within the last 5 seconds
+    When the player presses the Play button again
+    Then the cat state is "Zoomies"
+    And the "zoomies" animation is playing on loop
+    And the Energy stat depletes faster than during ordinary play

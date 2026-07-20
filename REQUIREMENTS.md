@@ -148,6 +148,13 @@ The system shall treat Energy values below 3 as critical, triggering a low-energ
 *Feature:* `sleeping.feature` → *Scenario:* "Energy below 3 triggers sleepy idle animation"
 > Same caveat as REQ-STAT-007 — no state-machine entry defined yet.
 
+**REQ-STAT-009** — Energy depletes rapidly during Zoomies
+Priority: Could · Verification: Test
+The system shall decrease the Energy stat at a faster rate while the cat is in the Zoomies state than the
+standard Playing depletion rate (REQ-STAT-004).
+Source: Backlog — Chief Product Owner idea, 2026-07-20 (not in original spec)
+*Feature:* `playing.feature` → *Scenario:* "Cat gets zoomies from too much play"
+
 ---
 
 ### 2.3 Player Actions (`ACT`) — spec §5
@@ -224,6 +231,12 @@ The system shall play `sad.gif` when the Happy stat is critical (see REQ-STAT-00
 Priority: Should · Verification: Test
 The system shall play `sleepy_idle.gif` as an idle variation when the Energy stat is low (see REQ-STAT-008).
 *Feature:* `sleeping.feature` → *Scenario:* "Energy low plays sleepy idle variation"
+
+**REQ-ANIM-010** — Zoomies animation
+Priority: Could · Verification: Test
+The system shall play `zoomies.gif` on loop while the cat is in the Zoomies state.
+Source: Backlog — Chief Product Owner idea, 2026-07-20 (not in original spec)
+*Feature:* `playing.feature` → *Scenario:* "Cat gets zoomies from too much play"
 
 ---
 
@@ -312,6 +325,14 @@ completes.
 > (REQ-ACT-002, REQ-STAT-004) are specified. See Open Questions (§4) before writing `state_machine.feature`
 > scenarios that touch Playing.
 
+**REQ-SM-007** — Idle → Zoomies
+Priority: Could · Verification: Test
+The system shall transition the cat from Idle to Zoomies when the Play button is pressed 4 times within a
+short time window (exact window length TBD — needs playtesting) while the Energy stat is above 7.
+Source: Backlog — Chief Product Owner idea, 2026-07-20 (not in original spec)
+*Feature:* `playing.feature` → *Scenario:* "Cat gets zoomies from too much play"
+> **Open question:** no exit transition is defined for Zoomies — see Open Questions (§4).
+
 ---
 
 ### 2.8 Non-Functional (`NFR`) — spec §2, §6
@@ -348,6 +369,7 @@ children.
 | REQ-STAT-006 | Tummy critical threshold | Must | feeding.feature | Not Started |
 | REQ-STAT-007 | Happy critical threshold | Should | playing.feature | Not Started |
 | REQ-STAT-008 | Energy critical threshold | Should | sleeping.feature | Not Started |
+| REQ-STAT-009 | Energy depletes rapidly during Zoomies | Could | playing.feature | Not Started |
 | REQ-ACT-001 | Feed restores Tummy | Must | feeding.feature | Not Started |
 | REQ-ACT-002 | Play restores Happy, depletes Energy | Must | playing.feature | Not Started |
 | REQ-ACT-003 | Sleep restores Energy over time | Must | sleeping.feature | Not Started |
@@ -361,6 +383,7 @@ children.
 | REQ-ANIM-007 | Playing animation | Should | playing.feature | Not Started |
 | REQ-ANIM-008 | Sad animation | Should | playing.feature | Not Started |
 | REQ-ANIM-009 | Sleepy idle animation | Should | sleeping.feature | Not Started |
+| REQ-ANIM-010 | Zoomies animation | Could | playing.feature | Not Started |
 | REQ-AUD-001 | Meow sound | Should | feeding.feature | Not Started |
 | REQ-AUD-002 | Happy sound | Should | playing.feature | Not Started |
 | REQ-AUD-003 | Eating sound | Should | feeding.feature | Not Started |
@@ -374,6 +397,7 @@ children.
 | REQ-SM-004 | Falling Asleep → Sleeping | Must | sleeping.feature | Not Started |
 | REQ-SM-005 | Sleeping → Waking Up | Must | sleeping.feature | Not Started |
 | REQ-SM-006 | Waking Up → Idle | Must | sleeping.feature | Not Started |
+| REQ-SM-007 | Idle → Zoomies | Could | playing.feature | Not Started |
 | REQ-NFR-001 | Technology stack | Must | — (inspection) | Not Started |
 | REQ-NFR-002 | Crisp pixel-art scaling | Must | — (inspection) | Not Started |
 | REQ-NFR-003 | Accessible for young players | Must | — (demonstration) | Not Started |
@@ -395,6 +419,12 @@ testable requirements:
    defined yet; not included in this document until scoped.
 4. **Background transitions** — background-swapping logic (`project.md`) is not yet designed; once it is,
    it should get its own `REQ-UI` or `REQ-SM` entries.
+5. **Zoomies trigger window** (REQ-SM-007) — confirmed to be time-windowed (a burst of 4 Play presses,
+   not just 4 presses ever), but the exact window length (3 seconds? 5?) isn't decided — needs playtesting
+   once implemented.
+6. **Zoomies exit condition** (REQ-SM-007) — no requirement yet defines how the cat leaves the Zoomies
+   state and returns to Idle (fixed duration? Energy hitting 0? something else?). Ask the Chief Product
+   Officer.
 
 ---
 
@@ -403,3 +433,4 @@ testable requirements:
 | Date | Change |
 |---|---|
 | 2026-07-13 | v1.0 — initial requirements set drafted from `virtual_pet_spec.docx` §3–§9 |
+| 2026-07-20 | Added REQ-SM-007, REQ-ANIM-010, REQ-STAT-009 (Zoomies) — Chief Product Owner idea, not in original spec. Trigger-window duration and exit condition flagged as open questions (§4). |
