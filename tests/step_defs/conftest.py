@@ -33,8 +33,14 @@ def press_sleep(cat):
 
 @when("the falling-asleep animation completes")
 @when("the waking-up animation completes")
+@when("the stretch animation completes")
 def animation_completes(cat):
     cat.on_animation_complete()
+
+
+@when("a stretch is triggered")
+def stretch_triggered(cat):
+    cat.trigger_stretch()
 
 
 @when(parsers.parse("{minutes:d} minutes pass"))

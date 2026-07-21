@@ -21,3 +21,9 @@ Feature: State Machine
     Given the cat state is "Idle"
     When the player presses the Sleep button
     Then the cat state is "Falling Asleep"
+
+  @REQ-SM-009
+  Scenario: Idle transitions to Stretching when triggered
+    Given the cat state is "Idle"
+    When a stretch is triggered
+    Then the cat state is "Stretching"

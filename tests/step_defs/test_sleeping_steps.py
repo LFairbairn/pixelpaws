@@ -30,9 +30,14 @@ def test_sleeping_transitions_to_waking_up():
 
 @scenario(
     "sleeping.feature",
-    "Energy restored plays waking-up animation once, then returns to idle",
+    "Energy restored plays waking-up animation once, then stretches",
 )
-def test_waking_up_animation_then_idle():
+def test_waking_up_animation_then_stretches():
+    pass
+
+
+@scenario("sleeping.feature", "Stretch animation plays once, then returns to idle")
+def test_stretch_animation_then_idle():
     pass
 
 

@@ -209,8 +209,16 @@ The system shall play `sleeping.gif` on loop while the cat is in the Sleeping st
 
 **REQ-ANIM-005** — Waking-up animation
 Priority: Must · Verification: Test
-The system shall play `waking_up.gif` once when Energy is restored, then transition to the Idle state.
-*Feature:* `sleeping.feature` → *Scenario:* "Energy restored plays waking-up animation once, then returns to idle"
+The system shall play `waking_up.gif` once when Energy is restored, then transition to the Stretching state
+(see REQ-SM-006).
+*Feature:* `sleeping.feature` → *Scenario:* "Energy restored plays waking-up animation once, then stretches"
+
+**REQ-ANIM-012** — Stretch animation
+Priority: Must · Verification: Test
+The system shall play `stretch.gif` once while the cat is in the Stretching state, whether reached after
+waking up (REQ-SM-006) or triggered randomly during Idle (REQ-SM-009).
+Source: Backlog — Chief Product Owner idea, 2026-07-21 (not in original spec)
+*Feature:* `sleeping.feature` → *Scenario:* "Stretch animation plays once, then returns to idle"
 
 **REQ-ANIM-006** — Eating animation
 Priority: Should · Verification: Test
@@ -322,17 +330,35 @@ Priority: Must · Verification: Test
 The system shall transition the cat from Sleeping to Waking Up once the Energy stat is restored.
 *Feature:* `sleeping.feature` → *Scenario:* "Sleeping transitions to Waking Up when Energy restored"
 
-**REQ-SM-006** — Waking Up → Idle
+**REQ-SM-006** — Waking Up → Stretching
 Priority: Must · Verification: Test
-The system shall transition the cat from Waking Up back to Idle automatically once the waking-up animation
+The system shall transition the cat from Waking Up to Stretching automatically once the waking-up animation
 completes.
-*Feature:* `sleeping.feature` → *Scenario:* "Waking Up transitions to Idle on animation completion"
+Source: Backlog — Chief Product Owner idea, 2026-07-21 (not in original spec). Revised from this
+requirement's original wording ("Waking Up → Idle") once Stretching was scoped — see Change Log (§5).
+*Feature:* `sleeping.feature` → *Scenario:* "Waking Up transitions to Stretching on animation completion"
 
 > **Gap in source spec:** §9's state table lists "Playing" as a transition target from Idle ("Play pressed")
 > but defines no row of its own (no animation, no exit transition back to Idle). There is currently no
 > `REQ-SM` entry for entering/exiting a Playing *state* — only the stat effects of the Play *action*
 > (REQ-ACT-002, REQ-STAT-004) are specified. See Open Questions (§4) before writing `state_machine.feature`
 > scenarios that touch Playing.
+
+**REQ-SM-008** — Stretching → Idle
+Priority: Must · Verification: Test
+The system shall transition the cat from Stretching back to Idle automatically once the stretch animation
+completes.
+Source: Backlog — Chief Product Owner idea, 2026-07-21 (not in original spec)
+*Feature:* `sleeping.feature` → *Scenario:* "Stretch animation plays once, then returns to idle"
+
+**REQ-SM-009** — Idle → Stretching (random)
+Priority: Should · Verification: Test
+The system shall occasionally transition the cat from Idle to Stretching on its own, independent of waking
+up — real cats stretch after sitting or walking around too, not only after a nap. Exact frequency/timing is
+a UI-layer concern (see REQ-ANIM-011's wandering timer for the equivalent pattern), not specified here;
+this requirement covers only that the transition exists and is triggerable.
+Source: Backlog — Chief Product Owner idea, 2026-07-21 (not in original spec)
+*Feature:* `state_machine.feature` → *Scenario:* "Idle transitions to Stretching when triggered"
 
 **REQ-SM-007** — Idle → Zoomies
 Priority: Could · Verification: Test
@@ -392,6 +418,7 @@ children.
 | REQ-ANIM-007 | Playing animation | Should | playing.feature | Not Started |
 | REQ-ANIM-008 | Sad animation | Should | playing.feature | Not Started |
 | REQ-ANIM-009 | Sleepy idle animation | Should | sleeping.feature | Not Started |
+| REQ-ANIM-012 | Stretch animation | Must | sleeping.feature | Not Started |
 | REQ-ANIM-010 | Zoomies animation | Could | playing.feature | Not Started |
 | REQ-ANIM-011 | Idle wandering | Should | — (demonstration) | Not Started |
 | REQ-AUD-001 | Meow sound | Should | feeding.feature | Not Started |
@@ -406,7 +433,9 @@ children.
 | REQ-SM-003 | Meowing → Idle | Must | feeding.feature | Not Started |
 | REQ-SM-004 | Falling Asleep → Sleeping | Must | sleeping.feature | Not Started |
 | REQ-SM-005 | Sleeping → Waking Up | Must | sleeping.feature | Not Started |
-| REQ-SM-006 | Waking Up → Idle | Must | sleeping.feature | Not Started |
+| REQ-SM-006 | Waking Up → Stretching | Must | sleeping.feature | Not Started |
+| REQ-SM-008 | Stretching → Idle | Must | sleeping.feature | Not Started |
+| REQ-SM-009 | Idle → Stretching (random) | Should | state_machine.feature | Not Started |
 | REQ-SM-007 | Idle → Zoomies | Could | playing.feature | Not Started |
 | REQ-NFR-001 | Technology stack | Must | — (inspection) | Not Started |
 | REQ-NFR-002 | Crisp pixel-art scaling | Must | — (inspection) | Not Started |
@@ -445,3 +474,4 @@ testable requirements:
 | 2026-07-13 | v1.0 — initial requirements set drafted from `virtual_pet_spec.docx` §3–§9 |
 | 2026-07-20 | Added REQ-SM-007, REQ-ANIM-010, REQ-STAT-009 (Zoomies) — Chief Product Owner idea, not in original spec. Trigger-window duration and exit condition flagged as open questions (§4). |
 | 2026-07-20 | Added REQ-ANIM-011 (idle wandering) — new `stand_idle`/`walking_left`/`walking_right` assets, not in original spec. Purely cosmetic, not modelled as a `CatState`. |
+| 2026-07-21 | Added Stretching as a formal `CatState` (REQ-SM-008, REQ-SM-009, REQ-ANIM-012), reached two ways: guaranteed after waking up, and occasionally at random during Idle (matching real cat behaviour — stretching isn't only a post-nap thing). Revised REQ-SM-006 and REQ-ANIM-005, which previously had Waking Up transition directly to Idle. |

@@ -29,6 +29,10 @@ class Cat:
     def press_sleep(self) -> None:
         self._handle(CatEvent.PRESS_SLEEP)
 
+    def trigger_stretch(self) -> None:
+        """No-ops unless currently Idle — real cats don't stretch mid-sleep."""
+        self._handle(CatEvent.STRETCH_TRIGGERED)
+
     def on_animation_complete(self) -> None:
         self.last_completed_animation = self.current_animation
         self._handle(CatEvent.ANIMATION_COMPLETE)

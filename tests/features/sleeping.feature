@@ -37,10 +37,17 @@ Feature: Sleeping
     Then the cat state is "Waking Up"
 
   @REQ-ANIM-005 @REQ-SM-006
-  Scenario: Energy restored plays waking-up animation once, then returns to idle
+  Scenario: Energy restored plays waking-up animation once, then stretches
     Given the cat state is "Waking Up"
     When the waking-up animation completes
     Then the "waking_up" animation has played once
+    And the cat state is "Stretching"
+
+  @REQ-ANIM-012 @REQ-SM-008
+  Scenario: Stretch animation plays once, then returns to idle
+    Given the cat state is "Stretching"
+    When the stretch animation completes
+    Then the "stretch" animation has played once
     And the cat state is "Idle"
 
   @REQ-STAT-008 @REQ-ANIM-009
