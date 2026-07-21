@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="assets/logo/pixelpaws_logo.png" alt="PixelPaws logo" width="180">
+</p>
+
 # PixelPaws
 
 [![CI](https://github.com/LFairbairn/pixelpaws/actions/workflows/ci.yml/badge.svg)](https://github.com/LFairbairn/pixelpaws/actions/workflows/ci.yml)
@@ -65,6 +69,7 @@ pixelpaws/
 │   ├── *.gif                 # Canonical (native size) animations
 │   ├── *_x10.gif              # Pre-scaled reference exports — not loaded by the game
 │   ├── piskel/                # Piskel source files
+│   ├── logo/                  # PixelPaws logo
 │   ├── backgrounds/
 │   └── sounds/
 ├── src/
